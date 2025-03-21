@@ -71,6 +71,9 @@
     font-display: swap;
 }
 
+
 @theme {
     --font-sans: "IRANSansX", sans-serif;
+    --color-primary: #D83939;
+    --color-secondary: #ADADAD;
 }
