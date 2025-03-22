@@ -24,8 +24,13 @@ const searchCookie = (name) => {
     let allCookies = document.cookie
     let arrCookies = allCookies.split(';')
     let findCookie = arrCookies.find(cookie => cookie.includes(name))
-    let findCookieArr = findCookie.split('=')
-    return findCookieArr[1]
+    if (findCookie) {
+        let findCookieArr = findCookie.split('=')
+        return findCookieArr[1]
+    }
+
+
+
 
 }
 
