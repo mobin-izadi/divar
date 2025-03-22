@@ -12,4 +12,12 @@ const darkMode = () => {
     }
 }
 
-export { LoadingHandler, darkMode }
+// set cookies
+const setCookie = (key, value, day, path) => {
+    let date = new Date()
+    date.setTime(date.getTime() + (day * 24 * 60 * 60 * 1000))
+    let expires = date.toUTCString()
+    document.cookie = `${key}=${value}; expires=${expires}; path=${path}`
+}
+
+export { LoadingHandler, darkMode, setCookie }

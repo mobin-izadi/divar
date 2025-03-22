@@ -1,5 +1,5 @@
 import { popularCities } from "./utils/cities.js"
-import { LoadingHandler } from "./utils/public.js"
+import { LoadingHandler, setCookie } from "./utils/public.js"
 
 const popCitiesWrapper = document.querySelector('.popular-cities__wrapper')
 const blurWrapper = document.querySelector('.blur')
@@ -37,11 +37,19 @@ const showPopCities = async () => {
         popCitiesWrapper.insertAdjacentHTML('beforeend', `
                     <li class="basis-1/5 text-center">
                                 <a href="main.html?city=${city.slug}"
-                                    class="text-sm font-medium text-black/56 dark:text-white/56 dark:hover:text-white hover:text-black">${city.name}</a>
+                                    class="text-sm font-medium text-black/56 dark:text-white/56 dark:hover:text-white hover:text-black popularcities__link">${city.name}</a>
                             </li>
                     `)
     })
 }
+// Add click event for popular cities to record in cookie
+const popCitiesEventHandler = () => {
+    let allPopCities = document.querySelectorAll('.popularcities__link')
+    allPopCities.forEach(city => {
+        city.addEventListener('click', () => { setCookie('city', city.innerHTML, 30, '/') })
+    })
+}
+
 
 
 // -------------------------------------events
@@ -54,6 +62,8 @@ window.addEventListener('load', async () => {
     }
 
     await showPopCities()
+    popCitiesEventHandler()
     LoadingHandler()
+
 
 })
