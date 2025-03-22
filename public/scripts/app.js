@@ -1,5 +1,5 @@
 import { popularCities } from "./utils/cities.js"
-import { LoadingHandler, setCookie } from "./utils/public.js"
+import { LoadingHandler, setCookie, searchCookie } from "./utils/public.js"
 
 const popCitiesWrapper = document.querySelector('.popular-cities__wrapper')
 const blurWrapper = document.querySelector('.blur')
@@ -49,21 +49,24 @@ const popCitiesEventHandler = () => {
         city.addEventListener('click', () => { setCookie('city', city.innerHTML, 30, '/') })
     })
 }
-
-
-
 // -------------------------------------events
 window.addEventListener('load', async () => {
-    let theme = localStorage.getItem('theme')
-    if (theme != 'dark') {
-        darkModeHandler()
+    let checkCookieCity = searchCookie('city')
+    if (checkCookieCity) {
+        window.location.href = `mian.html?city=${checkCookieCity}`
     } else {
-        document.querySelector('html').classList.add(theme)
+        let theme = localStorage.getItem('theme')
+        if (theme != 'dark') {
+            darkModeHandler()
+        } else {
+            document.querySelector('html').classList.add(theme)
+        }
+
+        await showPopCities()
+        popCitiesEventHandler()
+        LoadingHandler()
     }
 
-    await showPopCities()
-    popCitiesEventHandler()
-    LoadingHandler()
 
 
 })

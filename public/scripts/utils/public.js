@@ -19,5 +19,14 @@ const setCookie = (key, value, day, path) => {
     let expires = date.toUTCString()
     document.cookie = `${key}=${value}; expires=${expires}; path=${path}`
 }
+// search in cookie
+const searchCookie = (name) => {
+    let allCookies = document.cookie
+    let arrCookies = allCookies.split(';')
+    let findCookie = arrCookies.find(cookie => cookie.includes(name))
+    let findCookieArr = findCookie.split('=')
+    return findCookieArr[1]
 
-export { LoadingHandler, darkMode, setCookie }
+}
+
+export { LoadingHandler, darkMode, setCookie, searchCookie }
