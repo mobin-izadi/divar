@@ -1,10 +1,12 @@
-const url = 'https://divarapi.liara.run'
+let allCities = null
 // get all locations
 const locations = async () => {
     try {
         let res = await fetch('https://divarapi.liara.run/v1/location/')
         let allLocation = await res.json()
-        return allLocation
+        allCities = allLocation
+        allCities = allCities.data.cities
+        return allCities
         if (!res.ok) {
             throw new Error('Backend is disconnected')
         }
@@ -14,14 +16,26 @@ const locations = async () => {
     }
 }
 
+
 // get popular cities
-const popularCities = async () => {
-    let allCities = await locations()
-    let popCities = allCities.data.cities.filter(city => city.popular)
+const popularCities = () => {
+    let popCities = allCities.filter(city => city.popular)
     return popCities
+}
+
+// search city
+
+const searchCity = (name) => {
+
+    let resultSearch = allCities.filter(city => {
+        if (city.name.includes(name)) {
+            return name
+        }
+    })
+    return resultSearch
+
 }
 
 
 
-
-export { popularCities,locations }
+export { popularCities, locations, searchCity }

@@ -12,7 +12,7 @@
 <body class="dark:bg-neutral-700 dark:text-white/56">
     <!-- loading -->
     <div
-        class="flex justify-center items-center absolute inset-0 z-40 bg-white/60 dark:bg-black/60 backdrop-blur-[2px] loading ">
+        class="flex justify-center items-center fixed inset-0 w-full h-full z-40 bg-white/60 dark:bg-black/60 backdrop-blur-[2px] loading ">
         <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -80,6 +80,26 @@
                 d="M24,8C15.163,8,8,15.163,8,24s7.163,16,16,16s16-7.163,16-16S32.837,8,24,8z M20,13 c2.209,0,4,1.791,4,4c0,2.209-1.791,4-4,4s-4-1.791-4-4C16,14.791,17.791,13,20,13z M17,32c-2.209,0-4-1.791-4-4 c0-2.209,1.791-4,4-4s4,1.791,4,4C21,30.209,19.209,32,17,32z M22,24c0-1.105,0.895-2,2-2s2,0.895,2,2c0,1.105-0.895,2-2,2 S22,25.105,22,24z M28,35c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4C32,33.209,30.209,35,28,35z M31,24 c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4C35,22.209,33.209,24,31,24z">
             </path>
         </symbol>
+        <symbol id="not-found" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path d="M622.4 682.453333l60.330667-60.309333 256.405333 256.405333-60.330667 60.309334z"
+                    fill="#616161"></path>
+                <path
+                    d="M426.666667 426.666667m-341.333334 0a341.333333 341.333333 0 1 0 682.666667 0 341.333333 341.333333 0 1 0-682.666667 0Z"
+                    fill="#616161"></path>
+                <path d="M692.266667 753.92l60.309333-60.330667 185.514667 185.514667-60.330667 60.330667z"
+                    fill="#37474F"></path>
+                <path
+                    d="M426.666667 426.666667m-277.333334 0a277.333333 277.333333 0 1 0 554.666667 0 277.333333 277.333333 0 1 0-554.666667 0Z"
+                    fill="#64B5F6"></path>
+                <path
+                    d="M573.866667 302.933333c-36.266667-42.666667-89.6-68.266667-147.2-68.266666s-110.933333 25.6-147.2 68.266666c-8.533333 8.533333-6.4 23.466667 2.133333 29.866667 8.533333 8.533333 23.466667 6.4 29.866667-2.133333C341.333333 296.533333 381.866667 277.333333 426.666667 277.333333s85.333333 19.2 115.2 53.333334c4.266667 4.266667 10.666667 8.533333 17.066666 8.533333 4.266667 0 10.666667-2.133333 12.8-4.266667 8.533333-8.533333 8.533333-23.466667 2.133334-32z"
+                    fill="#BBDEFB"></path>
+            </g>
+            </symbo>
     </svg>
     <!-- container -->
     <div class="max-w-[566px] mx-auto max-sm:px-2 ">
@@ -120,14 +140,28 @@
                 </p>
                 <!-- search -->
                 <div
-                    class="border border-black/24 dark:border-white/24 rounded-[4px] p-2 flex items-center gap-2 focus-within:border-primary ">
-                    <button class="flex justify-center items-center">
+                    class="border border-black/24 dark:border-white/24 rounded-[4px] p-2 flex items-center gap-2 focus-within:border-primary relative ">
+                    <div class="flex justify-center items-center">
                         <svg class="size-6 text-black/32 dark:text-white/32">
                             <use href="#search"></use>
                         </svg>
-                    </button>
+                    </div>
                     <input type="text" placeholder="جستجوی شهر"
-                        class="placeholder:text-black/32 dark:placeholder:text-white/32 w-full outline-0">
+                        class="placeholder:text-black/32 dark:placeholder:text-white/32 w-full outline-0 search-input ">
+                    <!-- box search -->
+                    <div
+                        class=" invisible opacity-0  transition-all absolute left-0 right-0 top-11 z-30 bg-white dark:bg-neutral-700  border border-black/15 dark:border-white/15  w-full max-h-80  box-search overflow-hidden ">
+                        <ul class="box-search__wrapper max-h-80 overflow-y-auto">
+
+                        </ul>
+                        <!-- not found -->
+                        <div class="flex justify-center items-center flex-col gap-2 h-80 hidden box-search__not-found">
+                            <svg class="size-16">
+                                <use href="#not-found"></use>
+                            </svg>
+                            <p>شهر مورد نظر شما یافت نشد !</p>
+                        </div>
+                    </div>
                 </div>
                 <!-- Most visited cities -->
                 <div class="mt-7">
