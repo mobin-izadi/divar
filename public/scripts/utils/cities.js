@@ -24,7 +24,6 @@ const popularCities = () => {
 }
 
 // search city
-
 const searchCity = (name) => {
 
     let resultSearch = allCities.filter(city => {

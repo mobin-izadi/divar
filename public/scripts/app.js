@@ -9,30 +9,30 @@ const searchBox = document.querySelector('.box-search')
 const searchBoxNotFound = document.querySelector('.box-search__not-found')
 // -------------------------------------functions
 //dark mode show massage Handler
-const darkModeHandler = () => {
-    let darkPrefers = window.matchMedia('(prefers-color-scheme: dark)')
-    const notifyWrapper = document.querySelector('.notify')
-    const notifyYesBtn = document.querySelector('.notify__btn-yes')
-    const notifyNoBtn = document.querySelector('.notify__btn-no')
-    if (darkPrefers) {
-        notifyWrapper.classList.remove('hidden')
-        blurWrapper.classList.remove('hidden')
-    } else {
-        notifyWrapper.classList.add('hidden')
-        blurWrapper.classList.add('hidden')
-    }
+// const darkModeHandler = () => {
+//     let darkPrefers = window.matchMedia('(prefers-color-scheme: dark)')
+//     const notifyWrapper = document.querySelector('.notify')
+//     const notifyYesBtn = document.querySelector('.notify__btn-yes')
+//     const notifyNoBtn = document.querySelector('.notify__btn-no')
+//     if (darkPrefers) {
+//         notifyWrapper.classList.remove('hidden')
+//         blurWrapper.classList.remove('hidden')
+//     } else {
+//         notifyWrapper.classList.add('hidden')
+//         blurWrapper.classList.add('hidden')
+//     }
 
-    notifyYesBtn.addEventListener('click', () => {
-        document.querySelector('html').classList.add('dark')
-        notifyWrapper.classList.add('hidden')
-        blurWrapper.classList.add('hidden')
-        localStorage.setItem('theme', 'dark')
-    })
-    notifyNoBtn.addEventListener('click', () => {
-        notifyWrapper.classList.add('hidden')
-        blurWrapper.classList.add('hidden')
-    })
-}
+//     notifyYesBtn.addEventListener('click', () => {
+//         document.querySelector('html').classList.add('dark')
+//         notifyWrapper.classList.add('hidden')
+//         blurWrapper.classList.add('hidden')
+//         localStorage.setItem('theme', 'dark')
+//     })
+//     notifyNoBtn.addEventListener('click', () => {
+//         notifyWrapper.classList.add('hidden')
+//         blurWrapper.classList.add('hidden')
+//     })
+// }
 // Showing popular visited cities
 const showPopCities = async () => {
     let popCities = await popularCities()
@@ -91,12 +91,12 @@ window.addEventListener('load', async () => {
     if (checkCookieCity) {
         window.location.href = `pages/main.html?city=${checkCookieCity}`
     } else {
-        let theme = localStorage.getItem('theme')
-        if (theme != 'dark') {
-            darkModeHandler()
-        } else {
-            document.querySelector('html').classList.add(theme)
-        }
+        // let theme = localStorage.getItem('theme')
+        // if (theme != 'dark') {
+        //     darkModeHandler()
+        // } else {
+        //     document.querySelector('html').classList.add(theme)
+        // }
         await locations()
         await showPopCities()
         popCitiesEventHandler()
