@@ -7,6 +7,7 @@ const searchInput = document.querySelector('.search-input')
 const searchResultWrapper = document.querySelector('.box-search__wrapper')
 const searchBox = document.querySelector('.box-search')
 const searchBoxNotFound = document.querySelector('.box-search__not-found')
+let allCities = null
 // -------------------------------------functions
 //dark mode show massage Handler
 // const darkModeHandler = () => {
@@ -34,8 +35,8 @@ const searchBoxNotFound = document.querySelector('.box-search__not-found')
 //     })
 // }
 // Showing popular visited cities
-const showPopCities = async () => {
-    let popCities = await popularCities()
+const showPopCities = async (cities) => {
+    let popCities = await popularCities(cities)
     popCitiesWrapper.innerHTML = ''
     popCities.slice(0, 10).forEach(city => {
         popCitiesWrapper.insertAdjacentHTML('beforeend', `
@@ -57,14 +58,14 @@ const popCitiesEventHandler = () => {
 const searchHandler = (event) => {
     let targetCitySearch = event.target.value
     if (targetCitySearch.length) {
-        let resultFindCities = searchCity(targetCitySearch)
+        let resultFindCities = searchCity(targetCitySearch,allCities)
         console.log(resultFindCities.length);
         if (resultFindCities.length) {
             searchResultWrapper.innerHTML = ''
             resultFindCities.forEach(city => {
                 searchResultWrapper.insertAdjacentHTML('beforeend', `
                     <li class="hover:bg-black/10 p-2 ">
-                                        <a href="pages/main.html?city=${city.slug}" class="block" onclick=setCookieHandler('${city.name}')>${city.name}</a>
+                                        <a href="pages/main.html?city=${city.slug}" class="block text-sm" onclick=setCookieHandler('${city.name}')>${city.name}</a>
                                     </li>
                     `)
             })
@@ -97,8 +98,9 @@ window.addEventListener('load', async () => {
         // } else {
         //     document.querySelector('html').classList.add(theme)
         // }
-        await locations()
-        await showPopCities()
+        allCities = await locations()
+        allCities = allCities.data.cities
+        await showPopCities(allCities)
         popCitiesEventHandler()
         LoadingHandler()
     }
