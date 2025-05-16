@@ -1,5 +1,5 @@
 import { popularCities, searchCity, locations } from "./utils/cities.js"
-import { LoadingHandler, setCookie, searchCookie } from "./utils/public.js"
+import { LoadingHandler, setCookie, searchCookie ,getAllSocial} from "./utils/public.js"
 
 const popCitiesWrapper = document.querySelector('.popular-cities__wrapper')
 const blurWrapper = document.querySelector('.blur')
@@ -58,7 +58,7 @@ const popCitiesEventHandler = () => {
 const searchHandler = (event) => {
     let targetCitySearch = event.target.value
     if (targetCitySearch.length) {
-        let resultFindCities = searchCity(targetCitySearch,allCities)
+        let resultFindCities = searchCity(targetCitySearch, allCities)
         console.log(resultFindCities.length);
         if (resultFindCities.length) {
             searchResultWrapper.innerHTML = ''
@@ -71,6 +71,7 @@ const searchHandler = (event) => {
             })
             searchBoxNotFound.classList.add('hidden')
         } else {
+            searchResultWrapper.innerHTML = ''
             searchBoxNotFound.classList.remove('hidden')
         }
         searchBox.classList.add('visible')

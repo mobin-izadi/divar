@@ -33,5 +33,20 @@ const searchCookie = (name) => {
 
 
 }
+// get all social
+const getAllSocial = async () => {
+    try {
+        let res = await fetch('https://divarapi.liara.run/v1/social')
+        let socialRes = await res.json()
+        let socialArr = socialRes.data.socials
+        if (!socialRes.success) {
+            throw new Error('api disconnect!')
+        }
+        return socialArr
+    } catch (error) {
 
-export { LoadingHandler, darkMode, setCookie, searchCookie }
+        console.error(error)
+    }
+}
+
+export { LoadingHandler, darkMode, setCookie, searchCookie, getAllSocial }
